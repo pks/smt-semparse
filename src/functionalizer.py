@@ -37,6 +37,37 @@ class Functionalizer:
           break
       counter += 1
 
+  def run_sentence(self, experiment_dir, temp_dir):
+    hyp_file = open('%s/nbest.tmp' % temp_dir, 'r')
+
+    hypsets = []
+    hypset = []
+    last_eid = 0
+    for line in hyp_file:
+      parts = line.split('|||')
+      eid = int(parts[0])
+      if eid != last_eid:
+        hypsets.append(hypset)
+        hypset = []
+        last_eid = eid
+      score = parts[2] + ' ||| ' + parts[3].strip()
+      hyp = parts[1].strip()
+      hypset.append((hyp,score))
+    hypsets.append(hypset)
+    hyp_file.close()
+
+    counter = 0
+    for hypset in hypsets:
+      hypset = list(reversed(hypset))
+      while hypset:
+        hyp, score = hypset.pop()
+        fun = self.functionalize(hyp)
+        if fun:
+          return fun
+          break
+      counter += 1
+    return ""
+
   #xc = 0
   def functionalize(self, mrl):
 

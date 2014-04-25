@@ -1,12 +1,12 @@
 nbest:   100       # how many entries in the nbest list?
 corpus:  geo       # which corpus? [geo, robo]
 lang:    en        # which language? [en, de, el, th]
-stem:    false     # run the stemmer?
-symm:    srctotgt  # which symmetrization? [e.g. srctotgt, tgttosrc, grow, ...]
+stem:    true     # run the stemmer?
+symm:    tgttosrc  # which symmetrization? [e.g. srctotgt, tgttosrc, grow, ...]
 np:      true      # use NP list?
 np_type: all       # what version of NP list?
 model:   hier      # which machine translation model? [phrase, hier]
-run:     test      # which experiment? [dev, test, debug]
+run:     test      # which experiment? [dev, test, debug, all]
 workdir: work      # where?
 
 # experimental, and unrelated to published work
